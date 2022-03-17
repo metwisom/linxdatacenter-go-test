@@ -15,6 +15,7 @@ func readCsvFile(filePath string) (*Line, *Line) {
 	if len(os.Args) == 3 {
 		r.Comma = ([]rune(os.Args[2]))[0]
 	}
+	r.Read()
 
 	data, err := readData(r)
 	if err != nil {
@@ -25,7 +26,6 @@ func readCsvFile(filePath string) (*Line, *Line) {
 	}
 	var dearest Line = *data
 	var popular Line = *data
-	r.Read()
 
 	for {
 		Rec, err := readData(r)
