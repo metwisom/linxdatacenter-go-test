@@ -1,21 +1,30 @@
 # linxdatacenter-go-test
 
-Test for linxdatacenter
+Тестовое задание для Linxdatacenter
 
-## Usage
+## Особенности
+
+```
+Для CSV можно обрабатывать огромные файлы т.к. там построчное чтение, тестил на 2кк записей.
+Для JSON такое не провернуть, формат не позволяет
+```
+
+## Использование
 
 ```sh
 cd app
-go run . ./data/1.json      #just run for json
-go run . ./data/1.csv       #just run for csv
-go run . ./data/1.csv ","   #run with specifly comma for csv
-go build -o app             #build
-./app ./data/1.csv          #run builded app
+go run . ./data/1.json      #Запуск для JSON
+go run . ./data/1.csv       #Запуск для CSV
+go run . ./data/1.csv ","   #Запуск для CSV со специфичным разделителем
+go build -o app             #Собрать пакет
+./app ./data/1.csv          #Запустить собранный пакет
 ```
 
 ## Docker 
 ```sh
-sudo docker build . -t linxtest
-sudo docker run -v $(pwd)/app/data/:/var/data --rm -it linxtest /var/data/1.csv ","
-sudo docker run -v $(pwd)/app/data/:/var/data --rm -it linxtest /var/data/1.json
+sudo docker build . -t linxtest                                                         #Собираем образ
+sudo docker run -v $(pwd)/app/data/:/var/data --rm linxtest /var/data/1.csv ","     #Запускам для CSV прокидывая папку с хоста
+sudo docker run -v $(pwd)/app/data/:/var/data --rm linxtest /var/data/1.json        #Запускам для JSON прокидывая папку с хоста
+
+#Можно и не прокидывать, данные копируются в образ при билде
 ```
