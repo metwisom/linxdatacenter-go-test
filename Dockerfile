@@ -1,11 +1,6 @@
-FROM ubuntu
-ENV LC_ALL en_US.UTF-8
-RUN apt-get update 
-RUN echo 8 | apt-get install -y tzdata
+FROM golang:1.13
 COPY ./app /tmp/linxdatacenter
 COPY ./app/data /var/data
-RUN apt-get install -y golang && \
- cd /tmp/linxdatacenter && go build -o /bin/app
-CMD  
+RUN cd /tmp/linxdatacenter && go build -o /bin/app
 ENTRYPOINT ["/bin/app"]
 CMD ["/var/data/1.json"]
